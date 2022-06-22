@@ -1,8 +1,10 @@
 function App() {
   return (
-    /* Com tudo instalado e configurado, conseguimos estilizar nosso projeto a partir de classes
-    utilizando className:"" e apertando Ctrl + barra de espaço */
-    <h1 className="font-extrabold">Hello Word</h1>
+    /* Podemos utilizar a estilização de 2 maneiras:
+    - passando direto aqui no App.tsx, como no H1, utilizando o className="" e apertando Ctrl + barra de espaço
+    - passando um nome qualquer aqui na classe e no usando as classes no global.css */
+    <h1 className="nomeDaClasse font-extrabold size">Hello Word</h1>
+    
 
     
   )

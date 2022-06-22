@@ -1,4 +1,13 @@
+/* São os 3 conjuntos de estilização que serão utilizados */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* São os 3 conjuntos de estilização que serão utilizados */
+
+/* Para aplicar os estilos por aqui, utilize o @apply e passe o elemento ou classes que deseja e os estilos */
+body{
+    @apply bg-zinc-900 text-zinc-100;
+}
+.nomeDaClasse{
+    @apply text-violet-600 font-bold;
+}
+
