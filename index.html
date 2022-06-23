@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
@@ -34,7 +34,25 @@
     <!-- Inserir no global.css @tailwind base; @tailwind components; @tailwind utilities; -->
     <!-- Importar o css no main.tsx inserindo a linha: import './styles/global.css' -->
     <!-- Instalar as extensões: GraphQL, Tailwind CSS IntelliSense, PostCSS Language Support -->
-    <!-- Verificar novamente se o projeto está rodando com o npm run dev -->
+    <!-- Verificar novamente se o projeto está rodando no Terminal: npm run dev -->
     <!-- Tudo pronto para o início do projeto! -->
+
+    <!-- CMS = Content Management System -->
+    <!-- Utilizando o WordPress temos tanto o painel de ADMIN, quanto a parte visual do front-end (temas) interligados -->
+    <!-- Utilizando Headless CMS (GraphCMS neste projeto) temos o painel de ADMIN separadamente do Front -->
+    <!-- os dados podem ser fornecidos através de APIs REST ou GraphQL e o Front consome as APIs com o React -->
+
+    <!-- Toda API é gerada totalmente automatizada pelo GraphCMS -->
+    <!-- Para usar o GraphQL temos 2 coisas mais importantes para saber: -->
+    <!-- QUERY = buscar dados na API -->
+    <!-- MUTATION = criar, alterar ou deletar dados no Banco de dados -->
+
+    <!-- Para efetuar as requisições, utilizaremos o Apolo -->
+    <!-- Para Instalar o Apolo, no Terminal: npm i @apollo/client graphql -->
+    <!-- Criar pasta lib dentro de src, dentro de lib, criar o a arquivo de configuração: apollo.ts -->
+    <!-- Dentro do apollo.ts: export const client = new ApolloClient -->
+    <!-- Dentro da função ApolloClient:
+         uri: 'url da API copiada no https://app.graphcms.com/ no menu Settings / API Access / Content API',
+         cache: new InMemoryCache() -->
 
     
