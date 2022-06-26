@@ -1,58 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <!-- TSX é a extensão quando se trabalha com TypeScript + JSX (XML dentro do JavaScript)-->
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <title>Event Platform</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <!-- TSX é a extensão quando se trabalha com TypeScript + JSX (XML dentro do JavaScript)-->
+</body>
+
 </html>
 
-    <!-- React é uma biblioteca pra fazer construção de Componentes (funções que retornam algum HTML) -->
-    <!-- Instalar Node e NPM -->
-    <!-- Na pasta do projeto, utilizaremos a ferramenta Vite. No prompt de comando: npm create vite@latest -->
-    <!-- Inserir um nome para o projeto, selecionar a biblioteca, neste caso react -->
-    <!-- Neste projeto utilizatemos o React com TypeScript  -->
-    <!-- Agora, vamos instalar as dependências, dentro do Terminal do VSC: npm i -->
-    <!-- Para vizualizar o conteúdo do App.tsx como site, digitar no Terminal: npm run dev -->
-    <!-- Será gerado o link para vizualização -->
-    <!-- Instalando o Tailwindcss, postcss e autoprefixer como dependências de desenvolvimento -->
-    <!-- Digitar no Terminal: npm i tailwindcss postcss autoprefixer -D -->
-    <!-- Inicializar o Tailswindcss, no Terminal: npx tailwindcss init -p -->
-    <!-- Definir os arquivos que terão estilzação do tailwind com a linha abaixo -->
-    <!-- Inserir no arquivo tailwind.config.js na seção content:[] a string: './src/**/*.tsx' -->
-    <!-- Remover da pasta src todos os arquivos .css e .svg -->
-    <!-- Dentro do App.tsx retirar todos as linhas anteriores a função App, a linha const[count, setCount] = useState
+<!-- React é uma biblioteca pra fazer construção de Componentes (funções que retornam algum HTML) -->
+<!-- Instalar o React(onde vem o NPM) e o Node -->
+<!-- Na pasta do projeto, utilizaremos a ferramenta Vite. No prompt de comando: npm create vite@latest -->
+<!-- Inserir um nome para o projeto, selecionar a biblioteca, neste caso react -->
+<!-- Neste projeto utilizatemos o React com TypeScript  -->
+<!-- Agora, vamos instalar as dependências, dentro do Terminal do VSC: npm i -->
+<!-- Para vizualizar o conteúdo do App.tsx como site, digitar no Terminal: npm run dev -->
+<!-- Será gerado o link para vizualização -->
+<!-- Instalando o Tailwindcss, postcss e autoprefixer como dependências de desenvolvimento -->
+<!-- Digitar no Terminal: npm i tailwindcss postcss autoprefixer -D -->
+<!-- Inicializar o Tailswindcss, no Terminal: npx tailwindcss init -p -->
+<!-- Definir os arquivos que terão estilzação do tailwind com a linha abaixo -->
+<!-- Inserir no arquivo tailwind.config.js na seção content:[] a string: './src/**/*.tsx' -->
+<!-- Remover da pasta src todos os arquivos .css e .svg -->
+<!-- Dentro do App.tsx retirar todos as linhas anteriores a função App, a linha const[count, setCount] = useState
       e todo o conteúdo do return, deixando apenas a função App vazia e a última linha (export default App) -->
-    <!-- Dentro da main.tsx retirar o import './index.css' -->
-    <!-- Criar a pasta styles dentro de src, depois global.css dentro da styles -->
-    <!-- Inserir no global.css @tailwind base; @tailwind components; @tailwind utilities; -->
-    <!-- Importar o css no main.tsx inserindo a linha: import './styles/global.css' -->
-    <!-- Instalar as extensões: GraphQL, Tailwind CSS IntelliSense, PostCSS Language Support -->
-    <!-- Verificar novamente se o projeto está rodando no Terminal: npm run dev -->
-    <!-- Tudo pronto para o início do projeto! -->
+<!-- Dentro da main.tsx retirar o import './index.css' -->
+<!-- Criar a pasta styles dentro de src, depois global.css dentro da styles -->
+<!-- Inserir no global.css @tailwind base; @tailwind components; @tailwind utilities; -->
+<!-- Importar o css no main.tsx inserindo a linha: import './styles/global.css' -->
+<!-- Instalar as extensões: GraphQL, Tailwind CSS IntelliSense, PostCSS Language Support -->
+<!-- Verificar novamente se o projeto está rodando no Terminal: npm run dev -->
+<!-- Tudo pronto para o início do projeto! -->
 
-    <!-- CMS = Content Management System -->
-    <!-- Utilizando o WordPress temos tanto o painel de ADMIN, quanto a parte visual do front-end (temas) interligados -->
-    <!-- Utilizando Headless CMS (GraphCMS neste projeto) temos o painel de ADMIN separadamente do Front -->
-    <!-- os dados podem ser fornecidos através de APIs REST ou GraphQL e o Front consome as APIs com o React -->
+<!-- CMS = Content Management System -->
+<!-- Utilizando o WordPress temos tanto o painel de ADMIN, quanto a parte visual do front-end (temas) interligados -->
+<!-- Utilizando Headless CMS (GraphCMS neste projeto) temos o painel de ADMIN separadamente do Front -->
+<!-- os dados podem ser fornecidos através de APIs REST ou GraphQL e o Front consome as APIs com o React -->
 
-    <!-- Toda API é gerada totalmente automatizada pelo GraphCMS -->
-    <!-- Para usar o GraphQL temos 2 coisas mais importantes para saber: -->
-    <!-- QUERY = buscar dados na API -->
-    <!-- MUTATION = criar, alterar ou deletar dados no Banco de dados -->
+<!-- Toda API é gerada totalmente automatizada pelo GraphCMS -->
+<!-- Para usar o GraphQL temos 2 coisas mais importantes para saber: -->
+<!-- QUERY = buscar dados na API -->
+<!-- MUTATION = criar, alterar ou deletar dados no Banco de dados -->
 
-    <!-- Para efetuar as requisições, utilizaremos o Apolo -->
-    <!-- Para Instalar o Apolo, no Terminal: npm i @apollo/client graphql -->
-    <!-- Criar pasta lib dentro de src, dentro de lib, criar o a arquivo de configuração: apollo.ts -->
-    <!-- Dentro do apollo.ts: export const client = new ApolloClient -->
-    <!-- Dentro da função ApolloClient:
+<!-- Para efetuar as requisições, utilizaremos o Apolo -->
+<!-- Para Instalar o Apolo, no Terminal: npm i @apollo/client graphql -->
+<!-- Criar pasta lib dentro de src, dentro de lib, criar o a arquivo de configuração: apollo.ts -->
+<!-- Dentro do apollo.ts: export const client = new ApolloClient -->
+<!-- Dentro da função ApolloClient:
          uri: 'url da API copiada no https://app.graphcms.com/ no menu Settings / API Access / Content API',
          cache: new InMemoryCache() -->
 
-    
+<!-- Para inserir ícones, instalar a biblioteca Phosphor-react, no Terminal: npm i phosphor-react -->
+<!-- Depois, basta importar o ícone desejado. No .tsx: import {nomeDoIcone} from 'phosphor-react' -->
+<!-- Em seguida, basta chamar o componente no HTML: <nomeDoIcone /> -->

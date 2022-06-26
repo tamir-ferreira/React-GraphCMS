@@ -3,9 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Para aplicar os estilos por aqui, utilize o @apply e passe o elemento ou classes que deseja e os estilos */
+/* Para aplicar os estilos do tailwind direto por aqui no css,
+ utilize o @apply e passe o elemento ou classes que deseja e os estilos */
 body{
-    @apply bg-zinc-900 text-zinc-100;
+    @apply bg-gray-900 text-gray-100 antialiased;
+    /* melhora a qualidade visual das fonte em navegadores como Chrome */
+    /* -webkit-font-smoothing: antialiased; */
 }
 .nomeDaClasse{
     @apply text-violet-600 font-bold;
