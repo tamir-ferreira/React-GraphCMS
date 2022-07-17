@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      /* criando uma propriedade pra inserir uma imagem de background */
+      backgroundImage: {
+        blur: "url(src/assets/blur-background.png)"
+      },
       /* Incluir uma fonte externa, primeiro incluir o Link no index.html, depois configurar aqui o tailwind */
       fontFamily: {
         sans: 'Roboto, sans-serif'
