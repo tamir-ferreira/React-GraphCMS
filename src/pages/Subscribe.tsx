@@ -1,6 +1,47 @@
+import { gql, useMutation } from "@apollo/client";
+import { useState, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/Logo";
 
+/* criando a query para enviar os dados do formulário para o GraphCMS */
+/* String! - o ! siginifica que o campo é obrigatório */
+const CREATE_SUBSCRIBER_MUTATION = gql`
+  mutation CreateSubscriber ($name: String!, $email: String!) {
+    createSubscriber(data: {name: $name, email: $email}) {
+      id
+    }
+  }
+`
+
 export function Subscribe() {
+    const navigate = useNavigate();
+
+    /* usando o useState, a cada mudança dessa variável o componente reflete esse novo valor visualmente */
+    /* fazendo um desestruturação */
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+
+    /* o loaging tem nas queries e nas mutations - vai estar como true enquanto estiver sendo processada a solicitação */
+    const [createSubscriber, { loading }] = useMutation(CREATE_SUBSCRIBER_MUTATION);
+
+    async function handleSubscribe(event: FormEvent) {
+        event.preventDefault();
+
+        if (name === "") {
+            alert('Digite seu nome');
+        } else if (email === "") {
+            alert('Digite seu email');
+        } else {
+            await createSubscriber({
+                variables: {
+                    name,
+                    email,
+                }
+            });
+            navigate('/event');
+        }
+    }
+
     return (
         <div className="min-h-screen bg-cyan-300 bg-blur bg-cover bg-no-repeat flex flex-col items-center">
             <div className="w-full max-w-[1100px] flex items-center justify-between mt-20 mx-auto">
@@ -17,20 +58,27 @@ export function Subscribe() {
                 </div>
                 <div className="p-8 bg-gray-700 border border-gray-500 rounded">
                     <strong className="text-2xl mb-6 block">Inscreva-se gratuitamente</strong>
-                    <form action="" className="flex flex-col gap-2 w-full">
+
+                    <form onSubmit={handleSubscribe} className="flex flex-col gap-2 w-full">
                         <input
                             className="bg-gray-900 rounded px-5 h-14"
                             type="text"
                             placeholder="Seu nome completo"
+                            onChange={event => setName(event.target.value)}
                         />
                         <input
                             className="bg-gray-900 rounded px-5 h-14"
                             type="text"
                             placeholder="Digite seu e-mail"
+                            onChange={event => setEmail(event.target.value)}
                         />
                         <button
-                            className="mt-4 bg-green-500 uppercase py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors"
-                            type="submit">
+                            className="mt-4 bg-green-500 uppercase py-4 rounded font-bold text-sm
+                                       hover:bg-green-700 transition-colors disabled:opacity-50"
+                            type="submit"
+                            disabled={loading} //vai ficar desabilitado enquanto a solicitação (mutation) estiver em processamento
+                                               /*evitando assim do usuário dar vários clicks durante esse processo  */
+                        >
                             Garantir minha vaga
                         </button>
                     </form>
