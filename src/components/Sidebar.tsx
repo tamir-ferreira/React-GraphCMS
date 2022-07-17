@@ -24,7 +24,7 @@ interface GetLessonsQueryResponse{
 
 export function Sidebar() {
     const{ data } = useQuery<GetLessonsQueryResponse>(GET_LESSONS_QUERY)
-    console.log(data)
+    /* console.log(data) */
 
     return (
         /* para selecionar um tamanho exato, caso não tenha na pré-seleção do tailwind, inserir

@@ -1,33 +1,92 @@
 /* necessário para adicionar ícones ao projeto usando a biblioteca phosphor-react */
 import { CaretRight, DiscordLogo, FileArrowDown, Image, Lightning } from 'phosphor-react'
 
-export function Video() {
+import { gql, useQuery } from '@apollo/client'; //necessário para criar as queries
+
+/* importar a biblioteca vimejs para utilizar player de vídeo
+npm i @vime/core vime/react --force */
+import { Player, Youtube, DefaultUi } from '@vime/react'  /* customização dos controles do vídeo */
+import '@vime/core/themes/default.css';
+
+
+const GET_LESSON_BY_SLUG_QUERY = gql`
+  query GetLessonBySlug ($slug: String) {
+    lesson(where: {slug: $slug}) {
+        title
+        videoId
+        description 
+        teacher {
+        name
+        bio
+        avatarURL
+        }
+    }
+  }
+`
+interface GetLessonBySlugResponse{
+    lesson: {
+        title: string;
+        videoId: string;
+        description: string;
+        teacher: {
+            name: string;
+            bio: string;
+            avatarURL: string;
+        }
+    }
+}
+
+interface VideoProps {
+    lessonSlug: string;
+}
+
+export function Video(props: VideoProps) {
+    const { data } = useQuery<GetLessonBySlugResponse>(GET_LESSON_BY_SLUG_QUERY, {
+       variables: {
+         slug: props.lessonSlug,
+       } 
+    })
+
+    if(!data){
+        return (
+            <div className="flex-1">
+                <p>Carregando....</p>
+            </div>
+        )
+    }
+
+    /* console.log(data); */
+
     return (
         /* flex1 = flex: 1 1 0%; do css. Não vai ter tamanho fixo, pode esticar ou reduzir conforme necessário */
         <div className="flex-1 ">
             <div className="bg-black flex justify-center">
-                <div className="h-full w-full max-w-[1400px] max-h-[60vh] aspect-video bg-slate-500"></div>
+                <div className="h-full w-full max-w-[1400px] max-h-[60vh] aspect-video bg-slate-500">
+                    <Player>
+                        <Youtube videoId={data.lesson.videoId} /> {/* link do vídeo no youtube */}
+                        <DefaultUi /> {/* customização dos controles do vídeo */}
+                    </Player>
+                </div>
             </div>
             {/* mx-auto faz com que a DIV seja centralizada horizontalmente */}
             <div className="p-8 max-w-[1400px] mx-auto">
                 <div className="flex items-start gap-16">
                     <div className="flex-1">
                         {/* Título da Aula */}
-                        <h1 className="text-2xl font-bold">Aula 01 - Criando o projeto e realizando o setup inicial</h1>
+                        {data.lesson.title}
                         {/* Descrição da Aula - leading-relaxer aumenta o espaçamento entre as linhas*/}
-                        <p className="mt-4 text-gray-200 text-justify leading-relaxed">Nessa aula vamos dar início ao projeto criando a estrutura base da aplicação utilizando ReactJS,
-                            Vite e TailwindCSS. Vamos também realizar o setup do nosso projeto no GraphCMS criando as entidades
-                            da aplicação e integrando a API GraphQL gerada pela plataforma no nosso front-end utilizando Apollo Client.
+                        <p className="mt-4 text-gray-200 text-justify leading-relaxed">
+                            {data.lesson.description}
                         </p>
                         <div className='flex items-center gap-4 mt-6 mb-20'>
                             <img
                                 className='h-16 w-16 rounded-full border-2 border-blue-500'
-                                src="https://github.com/diego3g.png"
+                                src={data.lesson.teacher.avatarURL}
                                 alt="" />
 
                             <div className='leading-relaxed'>
-                                <strong className='text-2xl block'>Diego Fernandes</strong>
-                                <span className='text-gray-200 text-sm block'>CTO @Rocketseat</span>
+                                <strong className='text-2xl block'>{data.lesson.teacher.name}</strong>
+                                <span className='text-gray-200 text-sm block'>{data.lesson.teacher.bio}</span>
                             </div>
                         </div>
                     </div>

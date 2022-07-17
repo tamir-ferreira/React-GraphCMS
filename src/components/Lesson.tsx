@@ -1,11 +1,12 @@
 /* necessário para adicionar ícones ao projeto usando a biblioteca phosphor-react */
 import { CheckCircle, Lock } from 'phosphor-react'
-
 /* A biblioteca dayjs ou date-fns é necessária para trabalharmos com datas
 No Terminal: npm i date-fns */
 import { isPast, format } from 'date-fns'
 /* formatação em pt-BR importar aqui e adicionar como 3º parâmetro do format*/
 import ptBR from 'date-fns/locale/pt-BR'
+/* para utilizarmos o Link to do Router-dom no lugar do a href*/
+import { Link } from "react-router-dom";
 
 /* Aqui iremos listar os elementos que serão carregados dinamicamente em cada Aula */
 interface LessonProps {
@@ -25,11 +26,12 @@ export function Lesson(props: LessonProps) {
     const isLessonAvailable = isPast(props.availableAt);
     
     return (
-        <a href="#">
+        <Link to={`/event/lesson/${props.slug}`} className="group">
             <span className="text-gray-300">
                 {availableDateFormatted}
             </span>
-            <div className="border rounded border-gray-500 p-4 mt-2">
+
+            <div className="border rounded border-gray-500 p-4 mt-2 group-hover:border-green-500">
                 <header className="flex items-center justify-between">
 
                     {isLessonAvailable ? (
@@ -54,6 +56,6 @@ export function Lesson(props: LessonProps) {
                     {props.title}
                 </strong>
             </div>
-        </a>
+        </Link>
     )
 }
