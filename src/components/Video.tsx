@@ -7,9 +7,10 @@ import { gql, useQuery } from '@apollo/client'; //necessário para criar as quer
 npm i @vime/core vime/react --force */
 import { Player, Youtube, DefaultUi } from '@vime/react'  /* customização dos controles do vídeo */
 import '@vime/core/themes/default.css';
+import { useGetLessonBySlugQuery } from '../graphql/generated';
 
-
-const GET_LESSON_BY_SLUG_QUERY = gql`
+/* Query transferida para o arquivo get-lesson-by-slug-query.graphql após instalação do graphql-codegen */
+/* const GET_LESSON_BY_SLUG_QUERY = gql`
   query GetLessonBySlug ($slug: String) {
     lesson(where: {slug: $slug}) {
         title
@@ -22,7 +23,8 @@ const GET_LESSON_BY_SLUG_QUERY = gql`
         }
     }
   }
-`
+` 
+
 interface GetLessonBySlugResponse{
     lesson: {
         title: string;
@@ -34,28 +36,28 @@ interface GetLessonBySlugResponse{
             avatarURL: string;
         }
     }
-}
+} */
 
 interface VideoProps {
     lessonSlug: string;
 }
 
 export function Video(props: VideoProps) {
-    const { data } = useQuery<GetLessonBySlugResponse>(GET_LESSON_BY_SLUG_QUERY, {
-       variables: {
-         slug: props.lessonSlug,
-       } 
+    /* substituído pela uso do graphql-codegen */
+    /* const { data } = useQuery<GetLessonBySlugResponse>(GET_LESSON_BY_SLUG_QUERY, { */
+    const { data } = useGetLessonBySlugQuery({
+        variables: {
+            slug: props.lessonSlug,
+        }
     })
 
-    if(!data){
+    if (!data || !data.lesson) {
         return (
             <div className="flex-1">
                 <p>Carregando....</p>
             </div>
         )
     }
-
-    /* console.log(data); */
 
     return (
         /* flex1 = flex: 1 1 0%; do css. Não vai ter tamanho fixo, pode esticar ou reduzir conforme necessário */
@@ -78,17 +80,20 @@ export function Video(props: VideoProps) {
                         <p className="mt-4 text-gray-200 text-justify leading-relaxed">
                             {data.lesson.description}
                         </p>
-                        <div className='flex items-center gap-4 mt-6 mb-20'>
-                            <img
-                                className='h-16 w-16 rounded-full border-2 border-blue-500'
-                                src={data.lesson.teacher.avatarURL}
-                                alt="" />
 
-                            <div className='leading-relaxed'>
-                                <strong className='text-2xl block'>{data.lesson.teacher.name}</strong>
-                                <span className='text-gray-200 text-sm block'>{data.lesson.teacher.bio}</span>
+                        {data.lesson.teacher && ( //se a informação do professor existir, então mostrar a DIV abaixo
+                            <div className='flex items-center gap-4 mt-6 mb-20'>
+                                <img
+                                    className='h-16 w-16 rounded-full border-2 border-blue-500'
+                                    src={data.lesson.teacher.avatarURL}
+                                    alt="" />
+
+                                <div className='leading-relaxed'>
+                                    <strong className='text-2xl block'>{data.lesson.teacher.name}</strong>
+                                    <span className='text-gray-200 text-sm block'>{data.lesson.teacher.bio}</span>
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
 
                     <div className="flex flex-col gap-4 text-gray-100">

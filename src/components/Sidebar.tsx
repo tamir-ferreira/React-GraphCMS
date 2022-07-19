@@ -1,7 +1,9 @@
 import { gql, useQuery } from "@apollo/client"
+import { useGetLessonsQuery } from "../graphql/generated"
 import { Lesson } from "./Lesson"
 
-const GET_LESSONS_QUERY = gql`
+/* Query transferida para o arquivo get-lessons-query.graphql após instalação do graphql-codegen */
+/* const GET_LESSONS_QUERY = gql`
     query {
     lessons(orderBy: availableAt_ASC, stage: PUBLISHED) {
         id
@@ -11,7 +13,7 @@ const GET_LESSONS_QUERY = gql`
         lessonType
     }
 }
-`
+` 
 interface GetLessonsQueryResponse{
     lessons: {
         id: string
@@ -20,11 +22,12 @@ interface GetLessonsQueryResponse{
         slug: string
         lessonType: 'live' | 'class'
     }[]
-}
+} */
 
 export function Sidebar() {
-    const{ data } = useQuery<GetLessonsQueryResponse>(GET_LESSONS_QUERY)
-    /* console.log(data) */
+    /* substituído pela uso do graphql-codegen */
+    /* const{ data } = useQuery<GetLessonsQueryResponse>(GET_LESSONS_QUERY) */
+    const{ data } = useGetLessonsQuery();
 
     return (
         /* para selecionar um tamanho exato, caso não tenha na pré-seleção do tailwind, inserir

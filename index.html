@@ -70,3 +70,28 @@
 <!-- Para linkar as aulas e mudarem os vídeos conforme forem acessadas, devemos intalar o 
 React Router Dom (npm i react-router-dom --force)
 Criar o componente Router.tsx na pasta src -->
+
+<!-- Para simplificar o processo das solicitações das queries via Graphql, vamos instalar os plugins da lib graphql-codegen
+npm i @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo -D --force
+npm i @graphql-codegen/cli -D --force
+Na sequência criar o arquivo de configurações do codegen na raiz do projeto (codegen.yml)
+
+- Conteúdo deste arquivo:
+schema: https://api-sa-east-1.graphcms.com/v2/cl4r600ju0ot301yw6ayo55k5/master  //url do graphcms retirada do .env.local
+
+documents: './src/graphql/**/*.graphql'
+
+generates:
+  ./src/graphql/generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      reactApolloVersion: 3
+      withHooks: true
+      withHOC: false
+      whithComponent: false
+
+Na sequência incluir no package.json em "scripts": a linha "codegen": "graphql-codegen"
+Logo após, exeecutar no terminal:  (npm run codegen) que vai criar o arquivo generated.ts com toda a API em formato de TypeScript -->

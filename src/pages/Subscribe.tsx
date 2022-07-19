@@ -2,16 +2,18 @@ import { gql, useMutation } from "@apollo/client";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/Logo";
+import { useCreateSubscriberMutation } from "../graphql/generated";
 
+/* Query transferida para o arquivo create-subscriber-mutation.graphql após instalação do graphql-codegen */
 /* criando a query para enviar os dados do formulário para o GraphCMS */
 /* String! - o ! siginifica que o campo é obrigatório */
-const CREATE_SUBSCRIBER_MUTATION = gql`
+/* const CREATE_SUBSCRIBER_MUTATION = gql`
   mutation CreateSubscriber ($name: String!, $email: String!) {
     createSubscriber(data: {name: $name, email: $email}) {
       id
     }
   }
-`
+` */
 
 export function Subscribe() {
     const navigate = useNavigate();
@@ -21,8 +23,11 @@ export function Subscribe() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
-    /* o loaging tem nas queries e nas mutations - vai estar como true enquanto estiver sendo processada a solicitação */
-    const [createSubscriber, { loading }] = useMutation(CREATE_SUBSCRIBER_MUTATION);
+    /* o loading tem nas queries e nas mutations - vai estar como true enquanto estiver sendo processada a solicitação */
+
+    /* substituído pela uso do graphql-codegen */
+    /* const [createSubscriber, { loading }] = useMutation(CREATE_SUBSCRIBER_MUTATION); */
+    const [createSubscriber, { loading }] = useCreateSubscriberMutation();
 
     async function handleSubscribe(event: FormEvent) {
         event.preventDefault();
